@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin Sanchez Urrego - Portfolio Interactivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Chosen Palette: "Deep Tech" - Fondo Slate 900 con acentos Esmeralda e Indigo para estabilidad y crecimiento. -->
+
+    <!-- Application Structure Plan:
+        1. Hero Command Center: Introducción inspirada en terminal que resalta la dualidad Dev + Product.
+        2. Radar de Stack Técnico: Gráfico interactivo para visualizar el balance entre Backend, Frontend y Producto.
+        3. Ecosistema de Proyectos: Vista de dashboard. Al hacer clic se revelan detalles arquitectónicos y métricas. He añadido PascualBet como caso de estudio de lógica compleja y SQL Server.
+        4. Metodologías: Sección dedicada al 'Cómo' se trabaja (PRD, RLS, Documentación), diferenciando un Junior de un Pro.
+    -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <nav class="sticky top-0 z-50 glass-panel border-b border-slate-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-2 font-mono font-bold text-white tracking-tighter">Martin.Root()</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex items-baseline space-x-4">
+                        <button onclick="scrollToSection('hero')"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition">Inicio</button>
+                        <button onclick="scrollToSection('skills')"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition">Stack</button>
+                        <button onclick="scrollToSection('projects')"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition">Proyectos</button>
+                        <button onclick="scrollToSection('philosophy')"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition">Filosofía</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="relative py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2 z-10">
+                <div
+                    class="inline-flex items-center px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono mb-6">
+                    <span class="flex w-2 h-2 bg-emerald-500 rounded-full mr-2 animate-pulse"></span>
+                    Disponible para: Junior / Practicante
+                </div>
+                <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
+                    Martin Sanchez <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Ingeniero
+                        Fullstack</span>
+                </h1>
+                <p class="text-slate-400 text-lg mb-8 leading-relaxed max-w-xl">
+                    Especialista en arquitecturas con <strong>.NET</strong>, <strong>Node.js</strong> y <strong>SQL
+                        Server</strong>. Fusiono lógica transaccional segura con interfaces modernas en
+                    <strong>Vue</strong> y <strong>React</strong>.
+                </p>
+                <div class="flex gap-4">
+                    <button onclick="scrollToSection('projects')"
+                        class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition shadow-lg shadow-blue-500/20">Ver
+                        Proyectos</button>
+                    <a href="mailto:martinsanchez2704@gmail.com"
+                        class="px-6 py-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-semibold rounded-lg transition">Contactar</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 w-full">
+                <div class="glass-panel rounded-2xl p-6 relative">
+                    <div class="chart-container">
+                        <canvas id="skillsRadar"></canvas>
+                    </div>
+                    <p class="text-center text-xs text-slate-500 mt-4">Equilibrio entre Desarrollo, Datos y Producto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-16 bg-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-white mb-12">Núcleo Tecnológico</h2>
+            <div class="flex flex-wrap justify-center gap-4 mb-10">
+                <button onclick="filterSkills('all')"
+                    class="skill-btn active bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium transition"
+                    data-filter="all">Todos</button>
+                <button onclick="filterSkills('backend')"
+                    class="skill-btn bg-slate-700 text-slate-300 px-5 py-2 rounded-full text-sm font-medium transition"
+                    data-filter="backend">Backend & DB</button>
+                <button onclick="filterSkills('frontend')"
+                    class="skill-btn bg-slate-700 text-slate-300 px-5 py-2 rounded-full text-sm font-medium transition"
+                    data-filter="frontend">Frontend & Mobile</button>
+                <button onclick="filterSkills('product')"
+                    class="skill-btn bg-slate-700 text-slate-300 px-5 py-2 rounded-full text-sm font-medium transition"
+                    data-filter="product">Gestión & Tools</button>
+            </div>
+            <div id="skills-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-white mb-12">Ecosistema de Proyectos</h2>
+            <div class="grid md:grid-cols-12 gap-8">
+                <div class="md:col-span-4 space-y-4">
+                    <div onclick="selectProject('mambo')" id="card-mambo"
+                        class="project-card cursor-pointer p-6 rounded-xl glass-panel border border-slate-700 hover:border-emerald-500 transition-all ring-2 ring-emerald-500">
+                        <h3 class="text-xl font-bold text-white">Mambo Fitness</h3>
+                        <p class="text-slate-400 text-sm mt-2">React Native + Supabase + RLS</p>
+                    </div>
+                    <div onclick="selectProject('pascualbet')" id="card-pascualbet"
+                        class="project-card cursor-pointer p-6 rounded-xl glass-panel border border-slate-700 hover:border-yellow-500 transition-all">
+                        <h3 class="text-xl font-bold text-white">PascualBet Casino</h3>
+                        <p class="text-slate-400 text-sm mt-2">Vue 3 + Node.js + SQL Server</p>
+                    </div>
+                    <div onclick="selectProject('muelitas')" id="card-muelitas"
+                        class="project-card cursor-pointer p-6 rounded-xl glass-panel border border-slate-700 hover:border-indigo-500 transition-all">
+                        <h3 class="text-xl font-bold text-white">Sistema Muelitas</h3>
+                        <p class="text-slate-400 text-sm mt-2">.NET + SQL Server + 4 Capas</p>
+                    </div>
+                </div>
+                <div class="md:col-span-8">
+                    <div id="project-detail"
+                        class="h-full glass-panel rounded-2xl p-8 border border-slate-700 flex flex-col justify-between">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="philosophy" class="py-16 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">Calidad e Ingeniería</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="p-6 rounded-xl glass-panel">
+                    <div class="text-3xl mb-4">📜</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Documentación Robusta</h3>
+                    <p class="text-slate-400 text-sm">Creación de manuales técnicos y de usuario detallados para
+                        asegurar la escalabilidad y el soporte del sistema.</p>
+                </div>
+                <div class="p-6 rounded-xl glass-panel">
+                    <div class="text-3xl mb-4">🗄️</div>
+                    <h3 class="text-lg font-bold text-white mb-2">T-SQL Avanzado</h3>
+                    <p class="text-slate-400 text-sm">Uso de procedimientos almacenados y lógica en servidor para
+                        optimizar el rendimiento y la seguridad de los datos.</p>
+                </div>
+                <div class="p-6 rounded-xl glass-panel">
+                    <div class="text-3xl mb-4">🤝</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Trabajo en Equipo</h3>
+                    <p class="text-slate-400 text-sm">Experiencia colaborando en grupos multidisciplinarios bajo
+                        metodologías ágiles para entregar productos completos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 bg-slate-950 text-center border-t border-slate-900">
+        <p class="text-slate-500 text-sm">© 2026 Martin Sanchez Urrego | Medellín, Colombia</p>
+    </footer>
+
+    <script>
+        const skills = [
+            { name: "C# (.NET)", type: "backend", level: 90 },
+            { name: "Node.js / Express", type: "backend", level: 85 },
+            { name: "SQL Server (T-SQL)", type: "backend", level: 90 },
+            { name: "PostgreSQL", type: "backend", level: 85 },
+            { name: "React Native", type: "frontend", level: 90 },
+            { name: "Vue.js 3", type: "frontend", level: 85 },
+            { name: "React.js", type: "frontend", level: 80 },
+            { name: "PRD / Docs", type: "product", level: 95 }
+        ];
+
+        const projectDetails = {
+            mambo: {
+                title: "Mambo Fitness App",
+                desc: "Lead Dev & Product Owner",
+                text: "Ecosistema fitness con IA. Destaca por su seguridad con RLS y escalabilidad para 100k usuarios.",
+                tags: ["React Native", "Supabase", "RLS", "RevenueCat"],
+                highlight: "Arquitectura segura y monetizable.",
+                vizType: "chart",
+                vizData: [1000, 100000],
+                vizLabels: ["MVP Estándar", "Arquitectura Mambo"],
+                color: "#10b981"
+            },
+            pascualbet: {
+                title: "PascualBet Casino",
+                desc: "Desarrollador Fullstack",
+                text: "Plataforma de apuestas con lógica compleja en tiempo real. Gestión de saldo sincronizada mediante SQL Server.",
+                tags: ["Vue 3", "Node.js", "SQL Server", "Vite"],
+                highlight: "Lógica transaccional protegida en backend.",
+                vizType: "stat",
+                vizValue: "100%",
+                vizLabel: "Sincronización de Saldo en Tiempo Real",
+                color: "#eab308"
+            },
+            muelitas: {
+                title: "Sistema Muelitas",
+                desc: "Backend Developer",
+                text: "Gestión clínica robusta con arquitectura de 4 capas. Optimización mediante Stored Procedures.",
+                tags: ["C# .NET", "WinForms", "Stored Procedures"],
+                highlight: "Arquitectura empresarial desacoplada.",
+                vizType: "diagram",
+                color: "#6366f1"
+            }
+        };
+
+        const ctxRadar = document.getElementById('skillsRadar').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['Backend', 'Frontend', 'Bases de Datos', 'Visión de Producto', 'Calidad/Docs'],
+                datasets: [{
+                    data: [90, 88, 92, 90, 95],
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: '#3b82f6',
+                    pointBackgroundColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { grid: { color: 'rgba(255,255,255,0.1)' }, pointLabels: { color: '#94a3b8' }, ticks: { display: false } } }, plugins: { legend: { display: false } } }
+        });
+
+        function renderSkills(filter) {
+            const grid = document.getElementById('skills-grid');
+            grid.innerHTML = '';
+            const filtered = filter === 'all' ? skills : skills.filter(s => s.type === filter);
+            filtered.forEach(s => {
+                grid.innerHTML += `<div class="p-4 bg-slate-800 rounded-lg border border-slate-700 fade-in">
+                    <div class="flex justify-between mb-2"><span class="font-bold text-white text-sm">${s.name}</span><span class="text-xs text-slate-400">${s.level}%</span></div>
+                    <div class="w-full bg-slate-700 h-1.5 rounded-full"><div class="bg-blue-500 h-1.5 rounded-full" style="width:${s.level}%"></div></div>
+                </div>`;
+            });
+        }
+
+        function filterSkills(type) {
+            document.querySelectorAll('.skill-btn').forEach(b => {
+                b.classList.replace('bg-blue-600', 'bg-slate-700');
+                b.classList.replace('text-white', 'text-slate-300');
+                if (b.dataset.filter === type) {
+                    b.classList.replace('bg-slate-700', 'bg-blue-600');
+                    b.classList.replace('text-slate-300', 'text-white');
+                }
+            });
+            renderSkills(type);
+        }
+
+        let currentChart = null;
+        function selectProject(key) {
+            document.querySelectorAll('.project-card').forEach(c => c.classList.remove('ring-2', 'ring-emerald-500', 'ring-yellow-500', 'ring-indigo-500'));
+            const ringColors = { mambo: 'ring-emerald-500', pascualbet: 'ring-yellow-500', muelitas: 'ring-indigo-500' };
+            document.getElementById(`card-${key}`).classList.add('ring-2', ringColors[key]);
+            const p = projectDetails[key];
+            const detail = document.getElementById('project-detail');
+
+            let viz = '';
+            if (p.vizType === 'chart') viz = '<div class="chart-container"><canvas id="pChart"></canvas></div>';
+            else if (p.vizType === 'stat') viz = `<div class="text-center"><div class="text-6xl font-bold text-yellow-500 animate-pulse">${p.vizValue}</div><div class="text-slate-400 text-sm mt-2 uppercase tracking-widest">${p.vizLabel}</div></div>`;
+            else viz = `<div class="space-y-2 w-full max-w-xs mx-auto"><div class="bg-indigo-600 p-2 text-center rounded text-xs font-bold">Capa Presentación</div><div class="bg-indigo-500 p-2 text-center rounded text-xs font-bold">Capa Lógica</div><div class="bg-indigo-400 p-2 text-center rounded text-xs font-bold">Capa Datos</div><div class="bg-slate-700 p-2 text-center rounded text-xs border border-slate-500 font-bold">SQL Server</div></div>`;
+
+            detail.innerHTML = `<div class="fade-in">
+                <div class="flex flex-wrap gap-2 mb-4">${p.tags.map(t => `<span class="px-2 py-1 bg-slate-800 border border-slate-600 text-xs font-mono">${t}</span>`).join('')}</div>
+                <h2 class="text-3xl font-bold text-white mb-2">${p.title}</h2>
+                <p class="text-slate-300 leading-relaxed mb-6">${p.text}</p>
+                <div class="bg-slate-900/50 rounded-xl p-8 border border-slate-800 flex items-center justify-center">${viz}</div>
+            </div>`;
+
+            if (p.vizType === 'chart') {
+                const ctx = document.getElementById('pChart').getContext('2d');
+                if (currentChart) currentChart.destroy();
+                currentChart = new Chart(ctx, { type: 'bar', data: { labels: p.vizLabels, datasets: [{ data: p.vizData, backgroundColor: [p.color + '44', p.color], borderColor: p.color, borderWidth: 1 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#334155' } }, y: { grid: { display: false } } } } });
+            }
+        }
+
+        renderSkills('all');
+        selectProject('mambo');
+        function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+    </script>
+
+    <!-- Visualization & Content Choices:
+        1. Radar Chart: Muestra el balance entre código, datos y producto, ideal para la oferta de Satrack.
+        2. PascualBet Stat: Resalta la sincronización al 100%, vital para sistemas transaccionales.
+        3. Capacidad Mambo: Demuestra visión de escalabilidad.
+        4. Diagrama Muelitas: Prueba visual de manejo de arquitecturas complejas.
+        CONFIRMATION: NO SVG, NO Mermaid JS.
+    -->
+</body>
+
+</html>
