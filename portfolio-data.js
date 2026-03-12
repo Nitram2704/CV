@@ -87,6 +87,62 @@ const portfolioProjects = [
         }
     },
     {
+        id: 'repo-whisperer',
+        name: 'RepoWhisperer',
+        shortName: 'Whisperer',
+        description: 'Generador de documentación agentic que automatiza la creación de archivos Markdown mediante análisis de código con LLMs.',
+        longDescription: 'Herramienta avanzada de productividad que orquesta agentes de IA para analizar repositorios, extraer estructuras de código y generar documentación profesional. Utiliza procesamiento asíncrono e incremental para mantener el conocimiento técnico siempre sincronizado.',
+        category: 'ai',
+        categories: ['ai', 'devtools', 'backend'],
+        stack: ['Python', 'FastAPI', 'FastEmbed', 'Gemini API', 'DeepSeek', 'OpenRouter'],
+        githubUrl: 'https://github.com/Nitram2704/RepoWhisperer-',
+        liveUrl: null,
+        impactMetrics: 'Automatización total de la documentación técnica con actualización incremental',
+        featured: true,
+        status: 'completed',
+        color: '#0ea5e9', // Cyan
+        icon: '📚',
+        highlights: [
+            'Orquestación de agentes con LLMs',
+            'Análisis semántico con FastEmbed',
+            'Generación incremental de contenido',
+            'Soporte multi-modelo (Gemini/DeepSeek)'
+        ],
+        metrics: {
+            type: 'stat',
+            value: '100%',
+            label: 'Documentación Automatizada'
+        }
+    },
+    {
+        id: 'stock-iot',
+        name: 'Stock Management IoT',
+        shortName: 'Stock IoT',
+        description: 'Sistema de control de inventarios en tiempo real con integración de sensores IoT y panel de control industrial.',
+        longDescription: 'Plataforma premium diseñada para la gestión de stocks con latencia menor a 2s. Incluye un dashboard industrial interactivo, API para sensores IoT, y sistema de réplica en tiempo real con Supabase para una trazabilidad perfecta.',
+        category: 'fullstack',
+        categories: ['fullstack', 'data', 'backend', 'frontend'],
+        stack: ['Next.js 15', 'NestJS', 'Supabase Realtime', 'TypeScript', 'PostgreSQL', 'Tailwind CSS'],
+        githubUrl: 'https://github.com/Nitram2704/Stock',
+        liveUrl: null,
+        impactMetrics: 'Latencia <2s en actualizaciones de inventario vía IoT',
+        featured: true,
+        status: 'completed',
+        color: '#3b82f6', // Blue
+        icon: '📦',
+        highlights: [
+            'Actualizaciones en tiempo real (<2s)',
+            'Dashboard industrial con Next.js 15',
+            'Backend robusto con NestJS y RBAC',
+            'Integración mediante simulación IoT'
+        ],
+        metrics: {
+            type: 'stat',
+            value: '<2s',
+            label: 'Latencia de Actualización'
+        }
+    },
+    {
         id: 'pascualbet',
         name: 'PascualBet Casino',
         shortName: 'PascualBet',
