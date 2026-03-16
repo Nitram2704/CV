@@ -115,6 +115,34 @@ const portfolioProjects = [
         }
     },
     {
+        id: 'jailbreakforge',
+        name: 'JailbreakForge',
+        shortName: 'Forge',
+        description: 'Framework de Red Teaming para LLMs que automatiza pruebas de jailbreak y genera reportes de seguridad puntuados.',
+        longDescription: 'Herramienta de seguridad avanzada que utiliza un motor evolutivo para mutar ataques y evaluar las defensas de modelos de IA. Incluye un sistema de "LLM-as-Judge" para clasificar vulnerabilidades y generar reportes profesionales con una puntuación de seguridad (Security Score).',
+        category: 'ai',
+        categories: ['ai', 'devtools', 'backend'],
+        stack: ['Python', 'Typer', 'Groq', 'OpenRouter', 'SQLite', 'Jinja2'],
+        githubUrl: 'https://github.com/Nitram2704/JailBreakForge',
+        liveUrl: null,
+        impactMetrics: 'Automatización total de auditorías de seguridad para LLMs con reportes ejecutivos',
+        featured: true,
+        status: 'completed',
+        color: '#ef4444', // Red
+        icon: '🛡️',
+        highlights: [
+            'Motor de ataque evolutivo',
+            'Evaluación LLM-as-Judge',
+            'Reportes de seguridad dinámicos',
+            'Integración multi-modelo (Groq/OpenRouter)'
+        ],
+        metrics: {
+            type: 'stat',
+            value: '0-100',
+            label: 'Security Score Range'
+        }
+    },
+    {
         id: 'stock-iot',
         name: 'Stock Management IoT',
         shortName: 'Stock IoT',
