@@ -6,135 +6,135 @@ const portfolioProjects = [
         id: 'mambo-fitness',
         name: 'Mambo Fitness',
         shortName: 'Mambo',
-        description: 'Ecosistema fitness completo con IA, seguridad RLS y arquitectura escalable para 100k+ usuarios.',
-        longDescription: 'Aplicación móvil fitness con inteligencia artificial que incluye seguimiento de entrenamientos, planes personalizados, gamificación y monetización integrada. Destaca por su arquitectura segura con Row Level Security y capacidad de escalar a 100,000 usuarios.',
+        description: 'Full fitness ecosystem with AI, RLS security and scalable architecture for 100k+ users.',
+        longDescription: 'AI-powered mobile fitness application featuring workout tracking, personalized plans, gamification and integrated monetization. Stands out for its secure architecture with Row Level Security and ability to scale to 100,000 users.',
         category: 'mobile',
         categories: ['mobile', 'fullstack', 'ai'],
         stack: ['React Native', 'Expo', 'Supabase', 'PostgreSQL', 'RLS', 'RevenueCat', 'AI'],
         githubUrl: 'https://github.com/Nitram2704/mambo',
         liveUrl: null,
-        impactMetrics: 'Arquitectura segura y monetizable diseñada para escalar a 100k usuarios',
+        impactMetrics: 'Secure and monetizable architecture designed to scale to 100k users',
         featured: true,
         status: 'in-progress',
         color: '#10b981', // Emerald
         icon: '💪',
         highlights: [
-            'Row Level Security (RLS) para protección de datos',
-            'Integración con RevenueCat para monetización',
-            'Arquitectura escalable para 100k+ usuarios',
-            'Gamificación con sistema de logros'
+            'Row Level Security (RLS) for data protection',
+            'RevenueCat integration for monetization',
+            'Scalable architecture for 100k+ users',
+            'Gamification with achievement system'
         ],
         metrics: {
             type: 'chart',
             data: [1000, 100000],
-            labels: ['MVP Estándar', 'Arquitectura Mambo']
+            labels: ['Standard MVP', 'Mambo Architecture']
         }
     },
     {
         id: 'autoqa',
         name: 'AutoQA',
         shortName: 'AutoQA',
-        description: 'Herramienta de testing agentic con auto-reparación usando IA para analizar fallos y generar fixes automáticos.',
-        longDescription: 'Sistema de automatización de pruebas que utiliza IA (Gemini) para analizar fallos de tests, generar correcciones automáticas y ejecutar loops de auto-sanación. Reduce el tiempo de mantenimiento de tests en un 70%.',
+        description: 'Agentic testing tool with self-healing using AI to analyze failures and generate automatic fixes.',
+        longDescription: 'Test automation system leveraging AI (Gemini) to analyze test failures, generate automatic corrections and execute self-healing loops. Reduces test maintenance time by 70%.',
         category: 'ai',
         categories: ['ai', 'backend', 'devtools'],
         stack: ['TypeScript', 'Playwright', 'Gemini API', 'Node.js'],
         githubUrl: 'https://github.com/Nitram2704/AutoQA',
         liveUrl: null,
-        impactMetrics: 'Reducción del 70% en tiempo de mantenimiento de tests mediante auto-sanación',
+        impactMetrics: '70% reduction in test maintenance time through self-healing',
         featured: true,
         status: 'completed',
         color: '#f59e0b', // Amber
         icon: '🤖',
         highlights: [
-            'Auto-sanación de tests con IA',
-            'Análisis inteligente de fallos',
-            'Integración con Playwright',
-            'Reducción 70% tiempo de mantenimiento'
+            'AI-powered test self-healing',
+            'Intelligent failure analysis',
+            'Playwright integration',
+            '70% maintenance time reduction'
         ],
         metrics: {
             type: 'stat',
             value: '70%',
-            label: 'Reducción en Tiempo de Mantenimiento'
+            label: 'Maintenance Time Reduction'
         }
     },
     {
         id: 'smart-adapt-cv',
         name: 'Smart-Adapt CV',
         shortName: 'Smart CV',
-        description: 'Motor de optimización de carrera con IA que adapta CVs a vacantes específicas usando LLMs locales.',
-        longDescription: 'Sistema inteligente que utiliza modelos de lenguaje locales (Ollama + GLM-4.7) para analizar ofertas de trabajo y adaptar automáticamente CVs y cartas de presentación. Reduce el esfuerzo manual en un 90%.',
+        description: 'AI-powered career optimization engine that adapts CVs to specific job postings using local LLMs.',
+        longDescription: 'Intelligent system using local language models (Ollama + GLM-4.7) to analyze job postings and automatically adapt CVs and cover letters. Reduces manual effort by 90%.',
         category: 'ai',
         categories: ['ai', 'fullstack', 'backend'],
         stack: ['Python', 'FastAPI', 'React', 'Ollama', 'GLM-4.7', 'PostgreSQL'],
         githubUrl: 'https://github.com/Nitram2704/Smart-Adapt-CV',
         liveUrl: null,
-        impactMetrics: 'Automatización del 90% del proceso de adaptación de CVs',
+        impactMetrics: '90% automation of the CV adaptation process',
         featured: true,
         status: 'completed',
         color: '#8b5cf6', // Purple
         icon: '📄',
         highlights: [
-            'LLMs locales (Ollama + GLM-4.7)',
-            'Análisis inteligente de ofertas',
-            'Generación automática de cartas',
-            'Reducción 90% esfuerzo manual'
+            'Local LLMs (Ollama + GLM-4.7)',
+            'Intelligent job posting analysis',
+            'Automatic cover letter generation',
+            '90% manual effort reduction'
         ],
         metrics: {
             type: 'stat',
             value: '90%',
-            label: 'Reducción en Esfuerzo Manual'
+            label: 'Manual Effort Reduction'
         }
     },
     {
         id: 'repo-whisperer',
         name: 'RepoWhisperer',
         shortName: 'Whisperer',
-        description: 'Generador de documentación agentic que automatiza la creación de archivos Markdown mediante análisis de código con LLMs.',
-        longDescription: 'Herramienta avanzada de productividad que orquesta agentes de IA para analizar repositorios, extraer estructuras de código y generar documentación profesional. Utiliza procesamiento asíncrono e incremental para mantener el conocimiento técnico siempre sincronizado.',
+        description: 'Agentic documentation generator that automates Markdown file creation through LLM-powered code analysis.',
+        longDescription: 'Advanced productivity tool that orchestrates AI agents to analyze repositories, extract code structures and generate professional documentation. Uses async and incremental processing to keep technical knowledge always in sync.',
         category: 'ai',
         categories: ['ai', 'devtools', 'backend'],
         stack: ['Python', 'FastAPI', 'FastEmbed', 'Gemini API', 'DeepSeek', 'OpenRouter'],
         githubUrl: 'https://github.com/Nitram2704/RepoWhisperer-',
         liveUrl: null,
-        impactMetrics: 'Automatización total de la documentación técnica con actualización incremental',
+        impactMetrics: 'Full automation of technical documentation with incremental updates',
         featured: true,
         status: 'completed',
         color: '#0ea5e9', // Cyan
         icon: '📚',
         highlights: [
-            'Orquestación de agentes con LLMs',
-            'Análisis semántico con FastEmbed',
-            'Generación incremental de contenido',
-            'Soporte multi-modelo (Gemini/DeepSeek)'
+            'LLM agent orchestration',
+            'Semantic analysis with FastEmbed',
+            'Incremental content generation',
+            'Multi-model support (Gemini/DeepSeek)'
         ],
         metrics: {
             type: 'stat',
             value: '100%',
-            label: 'Documentación Automatizada'
+            label: 'Automated Documentation'
         }
     },
     {
         id: 'jailbreakforge',
         name: 'JailbreakForge',
         shortName: 'Forge',
-        description: 'Framework de Red Teaming para LLMs que automatiza pruebas de jailbreak y genera reportes de seguridad puntuados.',
-        longDescription: 'Herramienta de seguridad avanzada que utiliza un motor evolutivo para mutar ataques y evaluar las defensas de modelos de IA. Incluye un sistema de "LLM-as-Judge" para clasificar vulnerabilidades y generar reportes profesionales con una puntuación de seguridad (Security Score).',
+        description: 'Red Teaming framework for LLMs that automates jailbreak testing and generates scored security reports.',
+        longDescription: 'Advanced security tool using an evolutionary engine to mutate attacks and evaluate AI model defenses. Includes an "LLM-as-Judge" system to classify vulnerabilities and generate professional reports with a Security Score.',
         category: 'ai',
         categories: ['ai', 'devtools', 'backend'],
         stack: ['Python', 'Typer', 'Groq', 'OpenRouter', 'SQLite', 'Jinja2'],
         githubUrl: 'https://github.com/Nitram2704/JailBreakForge',
         liveUrl: null,
-        impactMetrics: 'Automatización total de auditorías de seguridad para LLMs con reportes ejecutivos',
+        impactMetrics: 'Full automation of LLM security audits with executive reports',
         featured: true,
         status: 'completed',
         color: '#ef4444', // Red
         icon: '🛡️',
         highlights: [
-            'Motor de ataque evolutivo',
-            'Evaluación LLM-as-Judge',
-            'Reportes de seguridad dinámicos',
-            'Integración multi-modelo (Groq/OpenRouter)'
+            'Evolutionary attack engine',
+            'LLM-as-Judge evaluation',
+            'Dynamic security reports',
+            'Multi-model integration (Groq/OpenRouter)'
         ],
         metrics: {
             type: 'stat',
@@ -146,146 +146,146 @@ const portfolioProjects = [
         id: 'stock-iot',
         name: 'Stock Management IoT',
         shortName: 'Stock IoT',
-        description: 'Sistema de control de inventarios en tiempo real con integración de sensores IoT y panel de control industrial.',
-        longDescription: 'Plataforma premium diseñada para la gestión de stocks con latencia menor a 2s. Incluye un dashboard industrial interactivo, API para sensores IoT, y sistema de réplica en tiempo real con Supabase para una trazabilidad perfecta.',
+        description: 'Real-time inventory control system with IoT sensor integration and industrial control dashboard.',
+        longDescription: 'Premium platform designed for stock management with sub-2s latency. Features an interactive industrial dashboard, IoT sensor API, and real-time replication system with Supabase for perfect traceability.',
         category: 'fullstack',
         categories: ['fullstack', 'data', 'backend', 'frontend'],
         stack: ['Next.js 15', 'NestJS', 'Supabase Realtime', 'TypeScript', 'PostgreSQL', 'Tailwind CSS'],
         githubUrl: 'https://github.com/Nitram2704/Stock',
         liveUrl: null,
-        impactMetrics: 'Latencia <2s en actualizaciones de inventario vía IoT',
+        impactMetrics: '<2s latency on inventory updates via IoT',
         featured: true,
         status: 'completed',
         color: '#3b82f6', // Blue
         icon: '📦',
         highlights: [
-            'Actualizaciones en tiempo real (<2s)',
-            'Dashboard industrial con Next.js 15',
-            'Backend robusto con NestJS y RBAC',
-            'Integración mediante simulación IoT'
+            'Real-time updates (<2s)',
+            'Industrial dashboard with Next.js 15',
+            'Robust backend with NestJS and RBAC',
+            'IoT simulation integration'
         ],
         metrics: {
             type: 'stat',
             value: '<2s',
-            label: 'Latencia de Actualización'
+            label: 'Update Latency'
         }
     },
     {
         id: 'pascualbet',
         name: 'PascualBet Casino',
         shortName: 'PascualBet',
-        description: 'Plataforma de apuestas con lógica compleja en tiempo real y gestión de saldo sincronizada mediante SQL Server.',
-        longDescription: 'Sistema de casino y apuestas con lógica transaccional compleja. Implementa sincronización de saldo en tiempo real, gestión de juegos múltiples y arquitectura segura con lógica protegida en backend.',
+        description: 'Betting platform with complex real-time logic and synchronized balance management via SQL Server.',
+        longDescription: 'Casino and betting system with complex transactional logic. Implements real-time balance synchronization, multi-game management and secure architecture with protected backend logic.',
         category: 'fullstack',
         categories: ['fullstack', 'backend', 'frontend'],
         stack: ['Vue 3', 'Node.js', 'SQL Server', 'Vite', 'Express'],
         githubUrl: 'https://github.com/samuelmontoya1314/pascualbet',
         liveUrl: null,
-        impactMetrics: 'Sincronización de saldo en tiempo real con 100% de precisión',
+        impactMetrics: 'Real-time balance synchronization with 100% accuracy',
         featured: false,
         status: 'completed',
         color: '#eab308', // Yellow
         icon: '🎰',
         highlights: [
-            'Lógica transaccional protegida',
-            'Sincronización tiempo real',
-            'Múltiples juegos de casino',
-            'Arquitectura segura backend'
+            'Protected transactional logic',
+            'Real-time synchronization',
+            'Multiple casino games',
+            'Secure backend architecture'
         ],
         metrics: {
             type: 'stat',
             value: '100%',
-            label: 'Sincronización de Saldo en Tiempo Real'
+            label: 'Real-Time Balance Sync'
         }
     },
     {
         id: 'pos-system',
         name: 'POS System',
         shortName: 'POS',
-        description: 'Sistema punto de venta integrado con WooCommerce para sincronizar inventario y ventas con e-commerce en vivo.',
-        longDescription: 'Sistema completo de punto de venta para gestión retail con integración total a WooCommerce. Sincroniza inventario y ventas entre tienda física y e-commerce. Procesa 1,000+ transacciones diarias con 99.9% uptime.',
+        description: 'Point-of-sale system integrated with WooCommerce for syncing inventory and sales with live e-commerce.',
+        longDescription: 'Complete point-of-sale system for retail management with full WooCommerce integration. Syncs inventory and sales between physical store and e-commerce. Processes 1,000+ daily transactions with 99.9% uptime.',
         category: 'fullstack',
         categories: ['fullstack', 'backend'],
         stack: ['Java', 'Spring Boot', 'MySQL', 'WooCommerce API', 'REST'],
         githubUrl: 'https://github.com/Nitram2704/POS',
         liveUrl: null,
-        impactMetrics: 'Procesamiento de 1,000+ transacciones diarias con 99.9% uptime',
+        impactMetrics: '1,000+ daily transactions processed with 99.9% uptime',
         featured: false,
         status: 'completed',
         color: '#3b82f6', // Blue
         icon: '🏪',
         highlights: [
-            'Integración WooCommerce completa',
-            'Sincronización inventario tiempo real',
-            '1,000+ transacciones diarias',
+            'Full WooCommerce integration',
+            'Real-time inventory sync',
+            '1,000+ daily transactions',
             '99.9% uptime'
         ],
         metrics: {
             type: 'stat',
             value: '1,000+',
-            label: 'Transacciones Diarias'
+            label: 'Daily Transactions'
         }
     },
     {
         id: 'h3-muelitas',
         name: 'H3 Muelitas',
         shortName: 'Muelitas',
-        description: 'Sistema de gestión clínica robusta con arquitectura de 4 capas y optimización mediante Stored Procedures.',
-        longDescription: 'Sistema empresarial para gestión de clínica dental con arquitectura de 4 capas desacoplada. Utiliza Stored Procedures para optimización de rendimiento y mantiene separación clara entre presentación, lógica y datos.',
+        description: 'Robust clinic management system with 4-layer architecture and optimization through Stored Procedures.',
+        longDescription: 'Enterprise system for dental clinic management with decoupled 4-layer architecture. Uses Stored Procedures for performance optimization and maintains clear separation between presentation, logic and data layers.',
         category: 'backend',
         categories: ['backend', 'fullstack'],
         stack: ['C# .NET', 'WinForms', 'SQL Server', 'Stored Procedures', 'ADO.NET'],
         githubUrl: 'https://github.com/stivenalexs/h3_muelitas',
         liveUrl: null,
-        impactMetrics: 'Mejora en eficiencia de gestión de registros dentales',
+        impactMetrics: 'Improved efficiency in dental records management',
         featured: false,
         status: 'completed',
         color: '#6366f1', // Indigo
         icon: '🦷',
         highlights: [
-            'Arquitectura 4 capas desacoplada',
-            'Stored Procedures optimizados',
-            'Gestión clínica completa',
-            'Separación clara de responsabilidades'
+            'Decoupled 4-layer architecture',
+            'Optimized Stored Procedures',
+            'Complete clinic management',
+            'Clear separation of concerns'
         ],
         metrics: {
             type: 'diagram',
-            layers: ['Presentación', 'Lógica', 'Datos', 'SQL Server']
+            layers: ['Presentation', 'Logic', 'Data', 'SQL Server']
         }
     },
     {
         id: 'finanzas-personales',
-        name: 'Finanzas Personales',
-        shortName: 'Finanzas',
-        description: 'Tracker de finanzas personales con sincronización Google Sheets y gestión de presupuestos.',
-        longDescription: 'Sistema completo de seguimiento financiero personal con integración a Google Sheets. Automatiza el tracking financiero para 50+ usuarios con alertas de presupuesto en tiempo real y análisis de gastos.',
+        name: 'Personal Finance Tracker',
+        shortName: 'Finance',
+        description: 'Personal finance tracker with Google Sheets sync and budget management.',
+        longDescription: 'Complete personal financial tracking system with Google Sheets integration. Automates financial tracking for 50+ users with real-time budget alerts and expense analysis.',
         category: 'backend',
         categories: ['backend', 'data'],
         stack: ['Python', 'Pandas', 'Google Sheets API', 'FastAPI'],
-        githubUrl: null, // No GitHub URL provided
+        githubUrl: null,
         liveUrl: null,
-        impactMetrics: 'Tracking financiero automatizado para 50+ usuarios con alertas en tiempo real',
+        impactMetrics: 'Automated financial tracking for 50+ users with real-time alerts',
         featured: false,
         status: 'completed',
         color: '#14b8a6', // Teal
         icon: '💰',
         highlights: [
-            'Integración Google Sheets',
-            'Alertas presupuesto tiempo real',
-            '50+ usuarios activos',
-            'Análisis automático de gastos'
+            'Google Sheets integration',
+            'Real-time budget alerts',
+            '50+ active users',
+            'Automated expense analysis'
         ],
         metrics: {
             type: 'stat',
             value: '50+',
-            label: 'Usuarios Activos'
+            label: 'Active Users'
         }
     }
 ];
 
 // Category definitions
 const categories = {
-    all: { name: 'Todos', color: '#64748b', icon: '📦' },
+    all: { name: 'All', color: '#64748b', icon: '📦' },
     mobile: { name: 'Mobile', color: '#10b981', icon: '📱' },
     fullstack: { name: 'Fullstack', color: '#3b82f6', icon: '🔧' },
     backend: { name: 'Backend', color: '#6366f1', icon: '⚙️' },

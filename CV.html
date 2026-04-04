@@ -1,698 +1,912 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Martin Sanchez Urrego - Portfolio Interactivo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
+    <title>Martin Sanchez - System Architect</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style id="custom-css">
+        /* ═══════════════════════════════════════════
+           CYBER-TERMINAL ARCHITECT - Design System
+           ═══════════════════════════════════════════ */
+        
+        :root {
+            --bg-void: #030711;
+            --bg-primary: #050a15;
+            --bg-secondary: #0a1628;
+            --bg-card: #0d1b2a;
+            --bg-card-hover: #112240;
+            --accent-cyan: #00f0ff;
+            --accent-orange: #ff6b35;
+            --accent-green: #00ff88;
+            --text-primary: #e8edf5;
+            --text-secondary: #7a8ba8;
+            --text-dim: #3d4f6f;
+            --border-subtle: rgba(0, 240, 255, 0.08);
+            --border-active: rgba(0, 240, 255, 0.25);
+            --glow-cyan: 0 0 15px rgba(0, 240, 255, 0.25), 0 0 40px rgba(0, 240, 255, 0.08);
+            --glow-orange: 0 0 15px rgba(255, 107, 53, 0.3);
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+            --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-med: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    <!-- Chosen Palette: "Deep Tech" - Fondo Slate 900 con acentos Esmeralda e Indigo para estabilidad y crecimiento. -->
-
-    <!-- Application Structure Plan:
-        1. Hero Command Center: Introducción inspirada en terminal que resalta la dualidad Dev + Product.
-        2. Radar de Stack Técnico: Gráfico interactivo para visualizar el balance entre Backend, Frontend y Producto.
-        3. Ecosistema de Proyectos: Vista de dashboard. Al hacer clic se revelan detalles arquitectónicos y métricas. He añadido PascualBet como caso de estudio de lógica compleja y SQL Server.
-        4. Metodologías: Sección dedicada al 'Cómo' se trabaja (PRD, RLS, Documentación), diferenciando un Junior de un Pro.
-    -->
-
-    <style>
+        /* RESET & BASE */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #e2e8f0;
+            font-family: var(--font-body);
+            background: var(--bg-void);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        a { color: var(--accent-cyan); text-decoration: none; transition: color var(--transition-fast); }
+        a:hover { color: #fff; }
+        strong { color: var(--accent-cyan); font-weight: 600; }
+        img { max-width: 100%; }
+
+        /* UTILITIES */
+        .h-screen { min-height: 100vh; }
+        .flex-center { display: flex; justify-content: center; align-items: center; }
+        .flex-wrap { flex-wrap: wrap; }
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .text-center { text-align: center; }
+        .inline-block { display: inline-block; }
+        .hidden { display: none !important; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mb-12 { margin-bottom: 3rem; }
+        .mt-8 { margin-top: 2rem; }
+        .mt-12 { margin-top: 3rem; }
+        .p-6 { padding: 1.5rem; }
+        .p-8 { padding: 2rem; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .max-w-lg { max-width: 520px; }
+        .w-full { width: 100%; }
+        .relative { position: relative; }
+        .text-xs { font-size: 0.75rem; }
+        .text-sm { font-size: 0.875rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-4xl { font-size: 2.25rem; }
+        .leading-relaxed { line-height: 1.75; }
+        .tracking-widest { letter-spacing: 0.1em; }
+        .font-space { font-family: var(--font-display); }
+        .font-mono { font-family: var(--font-mono); }
+        .font-inter { font-family: var(--font-body); }
+        .text-white { color: #fff; }
+        .text-secondary { color: var(--text-secondary); }
+        .text-accent-cyan { color: var(--accent-cyan); }
+        .text-accent-orange { color: var(--accent-orange); }
+        .text-accent-green { color: var(--accent-green); }
+        .glow-text-cyan { color: var(--accent-cyan); text-shadow: 0 0 10px rgba(0,240,255,0.5); }
+        .border-t { border-top: 1px solid rgba(0,240,255,0.08); }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-void); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 3px; }
+
+        /* PARTICLE CANVAS */
+        #particle-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
         }
 
-        .font-mono {
-            font-family: 'JetBrains Mono', monospace;
+        /* GRAIN OVERLAY */
+        #grain-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
+        /* NAVIGATION */
+        .top-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 2rem;
+            background: rgba(3, 7, 17, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .logo {
+            font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 8px rgba(0,240,255,0.4);
+        }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a {
+            font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.05em;
+            color: var(--text-dim); transition: all var(--transition-fast);
+            padding: 0.3rem 0; border-bottom: 1px solid transparent;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-cyan); border-bottom-color: var(--accent-cyan);
+        }
+        .menu-toggle {
+            display: none; background: none; border: none; cursor: pointer;
+            width: 28px; height: 20px; position: relative; z-index: 110;
+        }
+        .menu-toggle span {
+            display: block; width: 100%; height: 2px; background: var(--accent-cyan);
+            position: absolute; left: 0; transition: all 0.3s;
+        }
+        .menu-toggle span:nth-child(1) { top: 0; }
+        .menu-toggle span:nth-child(2) { top: 9px; }
+        .menu-toggle span:nth-child(3) { top: 18px; }
+        .menu-toggle.open span:nth-child(1) { top: 9px; transform: rotate(45deg); }
+        .menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .menu-toggle.open span:nth-child(3) { top: 9px; transform: rotate(-45deg); }
+
+        /* CONTENT SECTIONS */
+        .content-section { position: relative; z-index: 2; }
+        .section-padded { padding: 6rem 0; }
+        .section-header { margin-bottom: 3rem; }
+        .section-title {
+            font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700;
+            color: var(--accent-cyan); letter-spacing: 0.15em;
+            text-shadow: 0 0 8px rgba(0,240,255,0.3);
+        }
+        .divider {
+            width: 60px; height: 2px; margin-top: 0.75rem;
+            background: linear-gradient(90deg, var(--accent-cyan), transparent);
+        }
+
+        /* HERO */
+        #hero { flex-direction: column; text-align: center; position: relative; }
+        .massive-title {
+            font-family: var(--font-display); font-size: clamp(2.8rem, 8vw, 7rem);
+            font-weight: 700; letter-spacing: -0.02em; line-height: 1;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 60%, var(--accent-green) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(0,240,255,0.15));
+            margin-bottom: 1.5rem;
+        }
+        .sys-msg {
+            font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.1em;
+            opacity: 0; animation: fadeInUp 0.8s 0.5s forwards;
+        }
+        .typewriter-container {
+            font-family: var(--font-mono); font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: var(--text-secondary); font-weight: 400;
+            display: flex; align-items: center; justify-content: center; gap: 0;
+        }
+        .prompt-arrow { color: var(--accent-orange); }
+        .cursor {
+            color: var(--accent-cyan); font-weight: 700;
+            animation: blink 0.8s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: absolute; bottom: 2rem; display: flex;
+            flex-direction: column; align-items: center; gap: 0.5rem;
+            animation: fadeInUp 1s 2s forwards; opacity: 0;
+        }
+        .scroll-text { font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim); letter-spacing: 0.2em; }
+        .mouse {
+            width: 20px; height: 32px; border: 2px solid var(--text-dim);
+            border-radius: 10px; position: relative;
+        }
+        .wheel {
+            width: 3px; height: 6px; background: var(--accent-cyan);
+            border-radius: 2px; position: absolute; top: 6px; left: 50%;
+            transform: translateX(-50%); animation: scroll-wheel 1.5s infinite;
+        }
+        @keyframes scroll-wheel { 0% { opacity: 1; top: 6px; } 100% { opacity: 0; top: 18px; } }
+
+        /* CYBER BUTTONS */
+        .cyber-btn {
+            display: inline-block; padding: 0.75rem 1.8rem;
+            font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em;
+            border: 1px solid var(--border-active); color: var(--accent-cyan);
+            background: rgba(0, 240, 255, 0.04); position: relative;
+            transition: all var(--transition-med); cursor: pointer;
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+        }
+        .cyber-btn:hover {
+            background: rgba(0, 240, 255, 0.1); color: #fff;
+            box-shadow: var(--glow-cyan);
+            border-color: var(--accent-cyan);
+        }
+        .cyber-btn.primary { background: rgba(0, 240, 255, 0.08); }
+        .cyber-btn.secondary { border-color: var(--text-dim); color: var(--text-secondary); }
+        .cyber-btn.secondary:hover { border-color: var(--accent-orange); color: var(--accent-orange); box-shadow: var(--glow-orange); }
+        .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        /* CYBER CARD */
+        .cyber-card {
+            background: var(--bg-card); border: 1px solid var(--border-subtle);
+            position: relative; overflow: hidden;
+            transition: all var(--transition-med);
+            clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+        }
+        .cyber-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+            opacity: 0; transition: opacity var(--transition-med);
+        }
+        .cyber-card:hover { border-color: var(--border-active); background: var(--bg-card-hover); }
+        .cyber-card:hover::before { opacity: 1; }
+
+        /* STATS */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .stat-box { text-align: center; padding: 1rem; border: 1px solid var(--border-subtle); }
+        .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 700; }
+        .stat-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.1em; margin-top: 0.25rem; }
+
+        /* SKILL GRID */
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.75rem; }
+        .tech-node {
+            background: var(--bg-card); border: 1px solid var(--border-subtle); padding: 1rem 0.75rem;
+            text-align: center; font-family: var(--font-mono); font-size: 0.75rem;
+            color: var(--text-secondary); transition: all var(--transition-med);
+            position: relative; overflow: hidden; cursor: default;
+        }
+        .tech-node::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
+            background: var(--accent-cyan); transform: scaleX(0); transition: transform var(--transition-med);
+        }
+        .tech-node:hover { color: var(--accent-cyan); border-color: var(--border-active); background: var(--bg-card-hover); }
+        .tech-node:hover::after { transform: scaleX(1); }
+        .tech-node .tech-level {
+            display: block; font-size: 0.6rem; color: var(--text-dim); margin-top: 0.35rem;
+        }
+
+        /* PROJECT GRID */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+        .project-card {
+            background: var(--bg-card); border: 1px solid var(--border-subtle);
+            overflow: hidden; transition: all var(--transition-med); cursor: pointer;
+        }
+        .project-card:hover { border-color: var(--border-active); transform: translateY(-4px); box-shadow: var(--glow-cyan); }
+        .project-card .card-header {
+            display: flex; align-items: center; gap: 0.5rem;
+            padding: 0.6rem 1rem; background: rgba(0,240,255,0.03);
+            border-bottom: 1px solid var(--border-subtle);
+            font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim);
+        }
+        .card-header .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .dot.red { background: #ff5f57; }
+        .dot.yellow { background: #febc2e; }
+        .dot.green { background: #28c840; }
+        .project-card .card-body { padding: 1.25rem; }
+        .project-card .card-body h3 { font-family: var(--font-display); font-size: 1.1rem; color: #fff; margin-bottom: 0.5rem; }
+        .project-card .card-body p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5; }
+        .project-card .tag-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .tag {
+            font-family: var(--font-mono); font-size: 0.6rem; padding: 0.2rem 0.5rem;
+            border: 1px solid var(--border-subtle); color: var(--text-dim); letter-spacing: 0.05em;
+        }
+        .project-card .card-footer {
+            padding: 0.75rem 1.25rem; border-top: 1px solid var(--border-subtle);
+            font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .github-stats { display: flex; gap: 0.75rem; }
+        .github-stats span { display: flex; align-items: center; gap: 0.25rem; }
+
+        /* PHILOSOPHY */
+        .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .phil-card:hover .phil-icon { transform: scale(1.15); }
+        .phil-icon { transition: transform var(--transition-med); display: inline-block; }
+
+        /* FILTERS */
+        .cyber-filters { display: flex; }
+        .filter-btn {
+            font-family: var(--font-mono); font-size: 0.7rem; padding: 0.4rem 1rem;
+            border: 1px solid var(--border-subtle); background: transparent;
+            color: var(--text-dim); cursor: pointer; transition: all var(--transition-fast);
+            letter-spacing: 0.05em;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            color: var(--accent-cyan); border-color: var(--accent-cyan);
+            background: rgba(0,240,255,0.05);
+        }
+
+        /* CONTACT */
         .glass-panel {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(148, 163, 184, 0.1);
+            background: rgba(13, 27, 42, 0.6); border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(8px);
         }
+        .social-links { margin-top: 0.5rem; }
+        .social-icon { color: var(--text-dim); transition: all var(--transition-fast); }
+        .social-icon:hover { color: var(--accent-cyan); filter: drop-shadow(0 0 6px rgba(0,240,255,0.4)); }
+        
+        .justify-between { justify-content: space-between; }
+        .items-center { align-items: center; }
+        .flex { display: flex; }
 
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            height: 300px;
-            max-height: 400px;
+        /* MODAL */
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 200;
+            background: rgba(3, 7, 17, 0.9); backdrop-filter: blur(6px);
+            display: flex; justify-content: center; align-items: center; padding: 2rem;
         }
-
-        ::-webkit-scrollbar {
-            width: 8px;
+        .cyber-modal {
+            background: var(--bg-primary); border: 1px solid var(--border-active);
+            max-width: 700px; width: 100%; max-height: 85vh; overflow-y: auto;
         }
-
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
+        .window-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.6rem 1rem; background: rgba(0,240,255,0.03);
+            border-bottom: 1px solid var(--border-subtle);
         }
-
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
+        .window-title { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
+        .window-controls { display: flex; gap: 6px; }
+        .window-btn {
+            width: 12px; height: 12px; border-radius: 50%; border: none; cursor: pointer;
         }
+        .window-btn.minimize { background: #febc2e; }
+        .window-btn.maximize { background: #28c840; }
+        .window-btn.close { background: #ff5f57; }
+        .modal-content-area { padding: 2rem; }
+        .modal-content-area h3 { font-family: var(--font-display); font-size: 1.5rem; color: #fff; margin-bottom: 1rem; }
+        .modal-content-area p { color: var(--text-secondary); margin-bottom: 0.75rem; line-height: 1.7; }
+        .modal-content-area .tag-list { margin-top: 1rem; }
 
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
+        /* SCROLL REVEAL */
+        .reveal {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Category buttons */
-        .category-btn {
-            background-color: #1e293b;
-            color: #94a3b8;
-            border-color: #334155;
-        }
-
-        .category-btn.active {
-            background-color: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        .category-btn:hover:not(.active) {
-            background-color: #334155;
-            color: #e2e8f0;
-        }
-
-        /* Project cards */
-        .project-card-item {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .project-card-item:hover {
-            transform: translateY(-4px) scale(1.02);
-        }
-
-        /* Line clamp utility */
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-clamp: 2;
-            /* Standard property for compatibility */
-        }
-
-        /* Modal backdrop */
-        #project-modal {
-            animation: fadeInBackdrop 0.2s ease-out;
-        }
-
-        @keyframes fadeInBackdrop {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Smooth scrollbar for modal */
-        #project-modal .glass-panel {
-            scrollbar-width: thin;
-            scrollbar-color: #475569 #1e293b;
-        }
-
-        #project-modal .glass-panel::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        #project-modal .glass-panel::-webkit-scrollbar-track {
-            background: #1e293b;
-            border-radius: 4px;
-        }
-
-        #project-modal .glass-panel::-webkit-scrollbar-thumb {
-            background: #475569;
-            border-radius: 4px;
-        }
-
-        #project-modal .glass-panel::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
-        }
-
-        /* Responsive adjustments */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            .chart-container {
-                height: 250px;
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none; position: fixed; inset: 0; background: rgba(3,7,17,0.97);
+                flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+                z-index: 105;
             }
+            .nav-links.open { display: flex; }
+            .nav-links a { font-size: 1rem; }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); }
+            .projects-grid { grid-template-columns: 1fr; }
+            .hero-actions { flex-direction: column; align-items: center; }
+            .section-padded { padding: 4rem 0; }
+        }
+
+        /* REDUCED MOTION */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+            .reveal { opacity: 1; transform: none; }
+            #particle-canvas { display: none; }
         }
     </style>
-    <script src="portfolio-data.js"></script>
-    <script src="github-integration.js"></script>
 </head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div id="grain-overlay"></div>
 
-<body class="min-h-screen flex flex-col">
+    <!-- NAVIGATION -->
+    <header class="top-nav">
+        <div class="logo">&lt;MS /&gt;</div>
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-links">
+            <a href="#hero" class="active">// INIT</a>
+            <a href="#about">// PROFILE</a>
+            <a href="#stack">// SYS_STACK</a>
+            <a href="#work">// DEPLOYMENTS</a>
+            <a href="#philosophy">// KERNEL</a>
+            <a href="#contact">// PING</a>
+        </nav>
+    </header>
 
-    <nav class="sticky top-0 z-50 glass-panel border-b border-slate-700/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-2">
-                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span class="ml-2 font-mono font-bold text-white tracking-tighter">Martin.Root()</span>
-                </div>
-                <div class="hidden md:block">
-                    <div class="flex items-baseline space-x-4">
-                        <button onclick="scrollToSection('hero')"
-                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition">Inicio</button>
-                        <button onclick="scrollToSection('skills')"
-                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition">Stack</button>
-                        <button onclick="scrollToSection('projects')"
-                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition">Proyectos</button>
-                        <button onclick="scrollToSection('philosophy')"
-                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition">Filosofía</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <section id="hero" class="relative py-20 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2 z-10">
-                <div
-                    class="inline-flex items-center px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono mb-6">
-                    <span class="flex w-2 h-2 bg-emerald-500 rounded-full mr-2 animate-pulse"></span>
-                    Disponible para: Junior / Practicante
-                </div>
-                <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
-                    Martin Sanchez <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Ingeniero
-                        Fullstack</span>
-                </h1>
-                <p class="text-slate-400 text-lg mb-8 leading-relaxed max-w-xl">
-                    Especialista en arquitecturas con <strong>.NET</strong>, <strong>Node.js</strong> y <strong>SQL
-                        Server</strong>. Fusiono lógica transaccional segura con interfaces modernas en
-                    <strong>Vue</strong> y <strong>React</strong>.
-                </p>
-                <div class="flex gap-4">
-                    <button onclick="scrollToSection('projects')"
-                        class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition shadow-lg shadow-blue-500/20">Ver
-                        Proyectos</button>
-                    <a href="mailto:martinsanchez2704@gmail.com"
-                        class="px-6 py-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-semibold rounded-lg transition">Contactar</a>
+    <main>
+        <!-- HERO -->
+        <section id="hero" class="h-screen flex-center glass-panel content-section">
+            <div class="hero-content reveal">
+                <p class="sys-msg text-accent-cyan mb-2 typing-startup">INITIATING BOOT SEQUENCE... OK</p>
+                <h1 class="glitch-text massive-title" data-text="MARTIN SANCHEZ">MARTIN SANCHEZ</h1>
+                <h2 class="typewriter-container">
+                    <span class="prompt-arrow">&gt;&nbsp;</span>
+                    <span id="typewriter"></span>
+                    <span class="cursor">_</span>
+                </h2>
+                <div class="hero-actions mt-8">
+                    <a href="#work" class="cyber-btn primary">
+                        <span class="btn-text">EXECUTE_WORK()</span>
+                        <span class="btn-glitch"></span>
+                    </a>
+                    <a href="#contact" class="cyber-btn secondary">
+                        <span class="btn-text">ESTABLISH_UPLINK()</span>
+                    </a>
                 </div>
             </div>
-            <div class="md:w-1/2 w-full">
-                <div class="glass-panel rounded-2xl p-6 relative">
-                    <div class="chart-container">
-                        <canvas id="skillsRadar"></canvas>
-                    </div>
-                    <p class="text-center text-xs text-slate-500 mt-4">Equilibrio entre Desarrollo, Datos, AI/ML y
-                        Producto</p>
-                </div>
+            
+            <div class="scroll-indicator">
+                <span class="scroll-text">SCROLL_DOWN</span>
+                <div class="mouse"><div class="wheel"></div></div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="skills" class="py-16 bg-slate-800/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-white mb-12">Núcleo Tecnológico</h2>
-            <div class="flex flex-wrap justify-center gap-4 mb-10">
-                <button onclick="filterSkills('all')"
-                    class="skill-btn active bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium transition"
-                    data-filter="all">Todos</button>
-                <button onclick="filterSkills('backend')"
-                    class="skill-btn bg-slate-700 text-slate-300 px-5 py-2 rounded-full text-sm font-medium transition"
-                    data-filter="backend">Backend & DB</button>
-                <button onclick="filterSkills('frontend')"
-                    class="skill-btn bg-slate-700 text-slate-300 px-5 py-2 rounded-full text-sm font-medium transition"
-                    data-filter="frontend">Frontend & Mobile</button>
-                <button onclick="filterSkills('product')"
-                    class="skill-btn bg-slate-700 text-slate-300 px-5 py-2 rounded-full text-sm font-medium transition"
-                    data-filter="product">Gestión & Tools</button>
-            </div>
-            <div id="skills-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                <h2 class="text-3xl font-bold text-white">Ecosistema de Proyectos</h2>
-                <div class="flex items-center gap-2">
-                    <span class="text-slate-400 text-sm">Total: <span id="project-count"
-                            class="text-white font-bold">9</span> proyectos</span>
+        <!-- ABOUT -->
+        <section id="about" class="section-padded content-section">
+            <div class="container reveal">
+                <div class="section-header">
+                    <h2 class="section-title">PROFILE.DAT</h2>
+                    <div class="divider"></div>
                 </div>
-            </div>
-
-            <!-- Category Filters -->
-            <div class="flex flex-wrap gap-3 mb-8">
-                <button onclick="filterProjects('all')"
-                    class="category-btn active px-4 py-2 rounded-full text-sm font-medium transition-all border-2 cursor-pointer"
-                    data-category="all">
-                    <span class="mr-1">📦</span> Todos
-                </button>
-                <button onclick="filterProjects('mobile')"
-                    class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-all border-2 cursor-pointer"
-                    data-category="mobile">
-                    <span class="mr-1">📱</span> Mobile
-                </button>
-                <button onclick="filterProjects('fullstack')"
-                    class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-all border-2 cursor-pointer"
-                    data-category="fullstack">
-                    <span class="mr-1">🔧</span> Fullstack
-                </button>
-                <button onclick="filterProjects('backend')"
-                    class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-all border-2 cursor-pointer"
-                    data-category="backend">
-                    <span class="mr-1">⚙️</span> Backend
-                </button>
-                <button onclick="filterProjects('ai')"
-                    class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-all border-2 cursor-pointer"
-                    data-category="ai">
-                    <span class="mr-1">🤖</span> AI/ML
-                </button>
-            </div>
-
-            <!-- Projects Grid -->
-            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <!-- Projects will be rendered here dynamically -->
-            </div>
-
-            <!-- Project Detail Modal -->
-            <div id="project-modal"
-                class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-                onclick="closeModal(event)">
-                <div class="glass-panel rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-slate-700"
-                    onclick="event.stopPropagation()">
-                    <div id="modal-content" class="p-8">
-                        <!-- Modal content will be rendered here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="philosophy" class="py-16 bg-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-white mb-12 text-center">Calidad e Ingeniería</h2>
-            <div class="grid md:grid-cols-3 gap-8 text-center">
-                <div class="p-6 rounded-xl glass-panel">
-                    <div class="text-3xl mb-4">📜</div>
-                    <h3 class="text-lg font-bold text-white mb-2">Documentación Robusta</h3>
-                    <p class="text-slate-400 text-sm">Creación de manuales técnicos y de usuario detallados para
-                        asegurar la escalabilidad y el soporte del sistema.</p>
-                </div>
-                <div class="p-6 rounded-xl glass-panel">
-                    <div class="text-3xl mb-4">🗄️</div>
-                    <h3 class="text-lg font-bold text-white mb-2">T-SQL Avanzado</h3>
-                    <p class="text-slate-400 text-sm">Uso de procedimientos almacenados y lógica en servidor para
-                        optimizar el rendimiento y la seguridad de los datos.</p>
-                </div>
-                <div class="p-6 rounded-xl glass-panel">
-                    <div class="text-3xl mb-4">🤝</div>
-                    <h3 class="text-lg font-bold text-white mb-2">Trabajo en Equipo</h3>
-                    <p class="text-slate-400 text-sm">Experiencia colaborando en grupos multidisciplinarios bajo
-                        metodologías ágiles para entregar productos completos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-8 bg-slate-950 text-center border-t border-slate-900">
-        <p class="text-slate-500 text-sm">© 2026 Martin Sanchez Urrego | Medellín, Colombia</p>
-    </footer>
-
-    <script>
-        const skills = [
-            // Backend & Databases
-            { name: "C# (.NET)", type: "backend", level: 90 },
-            { name: "Node.js / Express", type: "backend", level: 85 },
-            { name: "Python / FastAPI", type: "backend", level: 85 },
-            { name: "Java / Spring Boot", type: "backend", level: 80 },
-            { name: "SQL Server (T-SQL)", type: "backend", level: 90 },
-            { name: "PostgreSQL / Supabase", type: "backend", level: 85 },
-            { name: "MySQL", type: "backend", level: 80 },
-
-            // Frontend & Mobile
-            { name: "React Native / Expo", type: "frontend", level: 90 },
-            { name: "Vue.js 3", type: "frontend", level: 85 },
-            { name: "React.js / Next.js", type: "frontend", level: 80 },
-            { name: "TypeScript", type: "frontend", level: 85 },
-
-            // AI/ML & Tools
-            { name: "Gemini API", type: "product", level: 85 },
-            { name: "Ollama / LLMs", type: "product", level: 80 },
-            { name: "Playwright Testing", type: "product", level: 85 },
-
-            // Product & Quality
-            { name: "PRD / Documentación", type: "product", level: 95 },
-            { name: "RLS / Seguridad", type: "product", level: 90 },
-            { name: "API Design (REST)", type: "product", level: 85 }
-        ];
-
-        // GitHub stats cache
-        let githubStatsCache = {};
-
-        // Initialize radar chart
-        const ctxRadar = document.getElementById('skillsRadar').getContext('2d');
-        new Chart(ctxRadar, {
-            type: 'radar',
-            data: {
-                labels: ['Backend', 'Frontend/Mobile', 'Bases de Datos', 'AI/ML', 'Visión de Producto', 'Calidad/Docs'],
-                datasets: [{
-                    data: [88, 85, 88, 83, 90, 95],
-                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                    borderColor: '#3b82f6',
-                    pointBackgroundColor: '#fff',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        grid: { color: 'rgba(255,255,255,0.1)' },
-                        pointLabels: {
-                            color: '#94a3b8',
-                            font: { size: 11 }
-                        },
-                        ticks: { display: false },
-                        min: 0,
-                        max: 100
-                    }
-                },
-                plugins: { legend: { display: false } }
-            }
-        });
-
-        // Skills rendering
-        function renderSkills(filter) {
-            const grid = document.getElementById('skills-grid');
-            grid.innerHTML = '';
-            const filtered = filter === 'all' ? skills : skills.filter(s => s.type === filter);
-            filtered.forEach(s => {
-                grid.innerHTML += `<div class="p-4 bg-slate-800 rounded-lg border border-slate-700 fade-in">
-                    <div class="flex justify-between mb-2"><span class="font-bold text-white text-sm">${s.name}</span><span class="text-xs text-slate-400">${s.level}%</span></div>
-                    <div class="w-full bg-slate-700 h-1.5 rounded-full"><div class="bg-blue-500 h-1.5 rounded-full" style="width:${s.level}%"></div></div>
-                </div>`;
-            });
-        }
-
-        function filterSkills(type) {
-            document.querySelectorAll('.skill-btn').forEach(b => {
-                b.classList.replace('bg-blue-600', 'bg-slate-700');
-                b.classList.replace('text-white', 'text-slate-300');
-                if (b.dataset.filter === type) {
-                    b.classList.replace('bg-slate-700', 'bg-blue-600');
-                    b.classList.replace('text-slate-300', 'text-white');
-                }
-            });
-            renderSkills(type);
-        }
-
-        // Project rendering functions
-        function renderProjectCard(project, stats = null) {
-            const statusBadge = project.featured ?
-                '<span class="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/30">⭐ Featured</span>' : '';
-
-            const githubBadge = stats && !stats.error ?
-                `<div class="flex gap-2 text-xs text-slate-400 mt-2">
-                    <span class="flex items-center gap-1">⭐ ${formatNumber(stats.stars)}</span>
-                    <span class="flex items-center gap-1">🔱 ${formatNumber(stats.forks)}</span>
-                    <span class="flex items-center gap-1">💻 ${stats.language}</span>
-                </div>` : '';
-
-            return `
-                <div class="project-card-item glass-panel rounded-xl p-6 border border-slate-700 hover:border-opacity-100 transition-all cursor-pointer transform hover:scale-105 hover:shadow-xl hover:shadow-${project.color.replace('#', '')}/20 fade-in"
-                     onclick="openProjectModal('${project.id}')"
-                     style="border-color: ${project.color}40;">
-                    <div class="flex justify-between items-start mb-3">
-                        <div class="text-3xl">${project.icon}</div>
-                        ${statusBadge}
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-2">${project.name}</h3>
-                    <p class="text-slate-400 text-sm mb-4 line-clamp-2">${project.description}</p>
-                    <div class="flex flex-wrap gap-1 mb-3">
-                        ${project.stack.slice(0, 3).map(tech =>
-                `<span class="px-2 py-1 bg-slate-800 border border-slate-600 text-xs font-mono text-slate-300">${tech}</span>`
-            ).join('')}
-                        ${project.stack.length > 3 ? `<span class="px-2 py-1 text-xs text-slate-500">+${project.stack.length - 3}</span>` : ''}
-                    </div>
-                    ${githubBadge}
-                    <div class="mt-4 pt-4 border-t border-slate-700 flex gap-2">
-                        <button class="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-lg transition">
-                            Ver Detalles
-                        </button>
-                        ${project.githubUrl ?
-                    `<a href="${project.githubUrl}" target="_blank" onclick="event.stopPropagation()" 
-                                class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white text-sm font-semibold rounded-lg transition">
-                                GitHub
-                            </a>` : ''}
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderProjectModal(project, stats = null) {
-            const githubStats = stats && !stats.error ?
-                `<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    <div class="glass-panel p-4 rounded-lg border border-slate-700 text-center">
-                        <div class="text-2xl font-bold text-yellow-400">${formatNumber(stats.stars)}</div>
-                        <div class="text-xs text-slate-400 mt-1">Stars</div>
-                    </div>
-                    <div class="glass-panel p-4 rounded-lg border border-slate-700 text-center">
-                        <div class="text-2xl font-bold text-blue-400">${formatNumber(stats.forks)}</div>
-                        <div class="text-xs text-slate-400 mt-1">Forks</div>
-                    </div>
-                    <div class="glass-panel p-4 rounded-lg border border-slate-700 text-center">
-                        <div class="text-2xl font-bold text-emerald-400">${stats.language}</div>
-                        <div class="text-xs text-slate-400 mt-1">Language</div>
-                    </div>
-                    <div class="glass-panel p-4 rounded-lg border border-slate-700 text-center">
-                        <div class="text-2xl font-bold text-indigo-400">${formatNumber(stats.watchers)}</div>
-                        <div class="text-xs text-slate-400 mt-1">Watchers</div>
-                    </div>
-                </div>` : '';
-
-            let visualization = '';
-            if (project.metrics.type === 'chart') {
-                visualization = `<div class="chart-container"><canvas id="modal-chart"></canvas></div>`;
-            } else if (project.metrics.type === 'stat') {
-                visualization = `<div class="text-center py-8">
-                    <div class="text-6xl font-bold animate-pulse" style="color: ${project.color}">${project.metrics.value}</div>
-                    <div class="text-slate-400 text-sm mt-2 uppercase tracking-widest">${project.metrics.label}</div>
-                </div>`;
-            } else if (project.metrics.type === 'diagram') {
-                visualization = `<div class="space-y-2 w-full max-w-xs mx-auto">
-                    ${project.metrics.layers.map((layer, i) =>
-                    `<div class="p-3 text-center rounded text-sm font-bold" style="background-color: ${project.color}${90 - i * 20}">${layer}</div>`
-                ).join('')}
-                </div>`;
-            }
-
-            return `
-                <div class="relative">
-                    <button onclick="closeModal()" class="absolute top-0 right-0 text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
-                    <div class="flex items-start gap-4 mb-6">
-                        <div class="text-5xl">${project.icon}</div>
-                        <div class="flex-1">
-                            <h2 class="text-3xl font-bold text-white mb-2">${project.name}</h2>
-                            <p class="text-slate-300 mb-4">${project.longDescription}</p>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                ${project.categories.map(cat =>
-                `<span class="px-3 py-1 rounded-full text-xs font-medium" style="background-color: ${categories[cat].color}20; color: ${categories[cat].color}; border: 1px solid ${categories[cat].color}40;">
-                                        ${categories[cat].icon} ${categories[cat].name}
-                                    </span>`
-            ).join('')}
+                
+                <div class="about-grid">
+                    <div class="about-text cyber-card p-8">
+                        <div class="card-glow"></div>
+                        <h3 class="text-2xl mb-4 font-space text-white">System Architect & Developer</h3>
+                        <p class="font-inter text-secondary mb-4 leading-relaxed">
+                            I build <strong class="text-white">high-performance logic structures</strong> and immersive digital experiences. Moving away from standard templates, my focus resides in performance optimization, systemic problem solving, and architecture design.
+                        </p>
+                        <p class="font-inter text-secondary leading-relaxed">
+                            Driven by the philosophy of finding elegant solutions to complex problems. Current runtime emphasizes Typescript, Python, and robust backend engineering.
+                        </p>
+                        
+                        <div class="stats-grid mt-8">
+                            <div class="stat-box">
+                                <div class="stat-num glow-text-cyan" data-target="15">0</div>
+                                <div class="stat-label">Deployments</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-num glow-text-cyan" data-target="3">0</div>
+                                <div class="stat-label">Years Uptime</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-num glow-text-cyan" data-target="20">0</div>
+                                <div class="stat-label">Tech Nodes</div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    ${githubStats}
+        <!-- STACK / SKILLS -->
+        <section id="stack" class="section-padded content-section">
+             <div class="container reveal">
+                <div class="section-header">
+                    <h2 class="section-title">SYS_STACK</h2>
+                    <div class="divider"></div>
+                </div>
+                
+                <div id="skills-filters" class="cyber-filters mb-8 flex-wrap flex-center gap-4">
+                    <!-- Populated by JS -->
+                </div>
+                
+                <div id="skills-grid" class="tech-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
 
-                    <div class="mb-6">
-                        <h3 class="text-lg font-bold text-white mb-3">Tech Stack</h3>
-                        <div class="flex flex-wrap gap-2">
-                            ${project.stack.map(tech =>
-                `<span class="px-3 py-1 bg-slate-800 border border-slate-600 text-sm font-mono text-slate-300 rounded">${tech}</span>`
-            ).join('')}
-                        </div>
+        <!-- WORK / PROJECTS -->
+        <section id="work" class="section-padded content-section">
+            <div class="container reveal">
+                <div class="section-header">
+                    <h2 class="section-title">DEPLOYMENTS</h2>
+                    <div class="divider"></div>
+                </div>
+                
+                <div id="project-filters" class="cyber-filters mb-8 flex-wrap flex-center gap-4">
+                    <!-- Populated by JS -->
+                </div>
+                
+                <div id="projects-grid" class="projects-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- PHILOSOPHY -->
+        <section id="philosophy" class="section-padded content-section mb-12">
+            <div class="container reveal">
+                <div class="section-header">
+                    <h2 class="section-title">KERNEL_PRINCIPLES</h2>
+                    <div class="divider"></div>
+                </div>
+                
+                <div class="philosophy-grid">
+                    <div class="phil-card cyber-card p-6 reveal">
+                        <div class="phil-icon text-accent-orange font-mono mb-4 text-xl">[1]</div>
+                        <h3 class="text-white font-space text-lg mb-2">Code is Liability</h3>
+                        <p class="text-secondary font-inter text-sm">Write less of it. The best feature is the one that achieves the goal without adding systemic complex overhead.</p>
                     </div>
-
-                    <div class="mb-6">
-                        <h3 class="text-lg font-bold text-white mb-3">Highlights</h3>
-                        <ul class="space-y-2">
-                            ${project.highlights.map(h =>
-                `<li class="flex items-start gap-2 text-slate-300">
-                                    <span class="text-emerald-400 mt-1">✓</span>
-                                    <span>${h}</span>
-                                </li>`
-            ).join('')}
-                        </ul>
+                    <div class="phil-card cyber-card p-6 reveal" style="transition-delay: 100ms">
+                        <div class="phil-icon text-accent-cyan font-mono mb-4 text-xl">[2]</div>
+                        <h3 class="text-white font-space text-lg mb-2">Ship & Iterate</h3>
+                        <p class="text-secondary font-inter text-sm">Deployment is the ultimate feedback loop. Get it into production, monitor behavior, adjust the approach.</p>
                     </div>
-
-                    <div class="mb-6">
-                        <h3 class="text-lg font-bold text-white mb-3">Impact</h3>
-                        <p class="text-slate-300 italic">"${project.impactMetrics}"</p>
-                    </div>
-
-                    <div class="bg-slate-900/50 rounded-xl p-8 border border-slate-800 mb-6">
-                        ${visualization}
-                    </div>
-
-                    <div class="flex gap-3">
-                        ${project.githubUrl ?
-                    `<a href="${project.githubUrl}" target="_blank" 
-                                class="flex-1 px-6 py-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-semibold rounded-lg transition text-center">
-                                Ver en GitHub
-                            </a>` : ''}
-                        ${project.liveUrl ?
-                    `<a href="${project.liveUrl}" target="_blank" 
-                                class="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition text-center">
-                                Ver Demo
-                            </a>` : ''}
+                    <div class="phil-card cyber-card p-6 reveal" style="transition-delay: 200ms">
+                        <div class="phil-icon text-accent-green font-mono mb-4 text-xl">[3]</div>
+                        <h3 class="text-white font-space text-lg mb-2">Deep Focus</h3>
+                        <p class="text-secondary font-inter text-sm">Systemic design requires intensive, uninterrupted immersion to architect environments that resist failure.</p>
                     </div>
                 </div>
-            `;
-        }
+            </div>
+        </section>
 
-        // Filter projects by category
-        let currentFilter = 'all';
-        function filterProjects(category) {
-            currentFilter = category;
+        <!-- CONTACT -->
+        <section id="contact" class="section-padded content-section">
+            <div class="container text-center reveal">
+                <h2 class="section-title text-4xl mb-4">READY TO INITIALIZE?</h2>
+                <p class="text-secondary font-inter mb-8 max-w-lg mx-auto">Awaiting command to establish a connection. Whether it is an inquiry or a systems build, the terminal is open.</p>
+                
+                <div class="contact-links glass-panel p-8 inline-block">
+                    <a href="mailto:martinsanchez2704@gmail.com" class="cyber-btn primary inline-block mb-6">
+                        <span class="btn-text">SEND_TRANSMISSION()</span>
+                    </a>
+                    
+                    <div class="social-links flex-center gap-6">
+                        <a href="mailto:martinsanchez2704@gmail.com" class="social-icon" title="Email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </a>
+                        <a href="https://github.com/Nitram2704" target="_blank" rel="noopener noreferrer" class="social-icon" title="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/martinsanchez-ing" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-            // Update button states
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                if (btn.dataset.category === category) {
-                    btn.classList.add('active', 'bg-blue-600', 'text-white', 'border-blue-600');
-                    btn.classList.remove('bg-slate-800', 'text-slate-400', 'border-slate-700');
+    <footer class="border-t border-gray-800 mt-12 py-6 relative z-10 w-full overflow-hidden">
+        <div class="container flex justify-between items-center px-6">
+            <p class="font-mono text-xs text-secondary tracking-widest">&copy; <span id="current-year"></span> M-SANCHEZ // SYS_NOMINAL</p>
+            <p class="font-mono text-xs text-accent-cyan tracking-widest">v2.0.0_PRODUCTION</p>
+        </div>
+    </footer>
+
+    <!-- Project Modal Overlay -->
+    <div id="project-modal" class="modal-overlay hidden">
+        <div class="cyber-modal window-frame">
+            <div class="window-header">
+                <span class="window-title">C:\APP\VIEWER.EXE</span>
+                <div class="window-controls">
+                    <button class="window-btn minimize"></button>
+                    <button class="window-btn maximize"></button>
+                    <button id="modal-close" class="window-btn close"></button>
+                </div>
+            </div>
+            <div id="modal-content" class="modal-content-area">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Data and Integration Scripts -->
+    <script src="portfolio-data.js"></script>
+    <script src="github-integration.js"></script>
+    <script id="custom-js">
+        // ═══════════════════════════════════════════
+        // CYBER-TERMINAL ARCHITECT - Engine
+        // ═══════════════════════════════════════════
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // ─── PARTICLE SYSTEM ───
+        (function initParticles() {
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let mouse = { x: -1000, y: -1000 };
+            const PARTICLE_COUNT = 80;
+            const CONNECT_DIST = 120;
+
+            function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+            resize();
+            window.addEventListener('resize', resize);
+            document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.4;
+                    this.vy = (Math.random() - 0.5) * 0.4;
+                    this.r = Math.random() * 1.5 + 0.5;
+                    this.alpha = Math.random() * 0.5 + 0.1;
+                }
+                update() {
+                    this.x += this.vx; this.y += this.vy;
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                    const dx = mouse.x - this.x, dy = mouse.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        this.x -= dx * 0.008;
+                        this.y -= dy * 0.008;
+                    }
+                }
+                draw() {
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 240, 255, ${this.alpha})`; ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < CONNECT_DIST) {
+                            ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(0, 240, 255, ${0.08 * (1 - dist / CONNECT_DIST)})`;
+                            ctx.lineWidth = 0.5; ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // ─── TYPING ANIMATION ───
+        (function initTypewriter() {
+            const el = document.getElementById('typewriter');
+            const roles = ['Fullstack Engineer', 'System Architect', 'AI Integrator', 'Problem Solver'];
+            let roleIdx = 0, charIdx = 0, deleting = false;
+
+            function tick() {
+                const current = roles[roleIdx];
+                el.textContent = current.substring(0, charIdx);
+                if (!deleting) {
+                    charIdx++;
+                    if (charIdx > current.length) { deleting = true; setTimeout(tick, 1800); return; }
                 } else {
-                    btn.classList.remove('active', 'bg-blue-600', 'text-white', 'border-blue-600');
-                    btn.classList.add('bg-slate-800', 'text-slate-400', 'border-slate-700');
+                    charIdx--;
+                    if (charIdx === 0) { deleting = false; roleIdx = (roleIdx + 1) % roles.length; }
+                }
+                setTimeout(tick, deleting ? 40 : 90);
+            }
+            setTimeout(tick, 1500);
+        })();
+
+        // ─── SCROLL REVEALS ───
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ─── STAT COUNTERS ───
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting && !e.target.dataset.counted) {
+                    e.target.dataset.counted = 'true';
+                    const target = parseInt(e.target.dataset.target);
+                    let current = 0;
+                    const step = Math.max(1, Math.floor(target / 40));
+                    const interval = setInterval(() => {
+                        current += step;
+                        if (current >= target) { current = target; clearInterval(interval); }
+                        e.target.textContent = current + '+';
+                    }, 30);
                 }
             });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.stat-num').forEach(el => statObserver.observe(el));
 
-            renderProjects(category);
+        // ─── NAVIGATION ───
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('open');
+            navLinks.classList.toggle('open');
+        });
+        navLinks.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                menuToggle.classList.remove('open');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Active nav on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navItems = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => {
+                if (window.scrollY >= s.offsetTop - 200) current = s.id;
+            });
+            navItems.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+            });
+        });
+
+        // ─── SKILLS RENDERING ───
+        function renderSkills() {
+            const grid = document.getElementById('skills-grid');
+            const filtersEl = document.getElementById('skills-filters');
+            if (!grid || typeof portfolioProjects === 'undefined') return;
+
+            const skillMap = {};
+            if (typeof portfolioProjects !== 'undefined') {
+                portfolioProjects.forEach(p => {
+                    (p.stack || []).forEach(tech => {
+                        if (!skillMap[tech]) skillMap[tech] = 0;
+                        skillMap[tech]++;
+                    });
+                });
+            }
+
+            const categories = {
+                'Frontend': ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML/CSS', 'Vue.js', 'Angular', 'Svelte', 'CSS'],
+                'Backend': ['Node.js', 'Python', 'FastAPI', 'Express', 'Django', 'Flask', 'Java', 'Go', 'Rust', 'C#', '.NET'],
+                'Data & AI': ['OpenAI API', 'LangChain', 'TensorFlow', 'PyTorch', 'Pandas', 'NumPy', 'Scikit-learn', 'Hugging Face', 'GPT', 'Machine Learning'],
+                'Infrastructure': ['Docker', 'AWS', 'GCP', 'Azure', 'Kubernetes', 'Vercel', 'Supabase', 'Firebase', 'PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Git']
+            };
+
+            // Build unique skill set
+            const allSkills = new Set(Object.keys(skillMap));
+            Object.values(categories).forEach(arr => arr.forEach(s => allSkills.add(s)));
+
+            // Render filters
+            filtersEl.innerHTML = '<button class="filter-btn active" data-cat="all">ALL</button>';
+            Object.keys(categories).forEach(cat => {
+                filtersEl.innerHTML += `<button class="filter-btn" data-cat="${cat}">${cat.toUpperCase()}</button>`;
+            });
+
+            function getCategory(skill) {
+                for (const [cat, list] of Object.entries(categories)) {
+                    if (list.includes(skill)) return cat;
+                }
+                return 'Other';
+            }
+
+            function renderGrid(filter) {
+                grid.innerHTML = '';
+                const skills = filter === 'all'
+                    ? [...allSkills]
+                    : (categories[filter] || []).filter(s => allSkills.has(s));
+
+                skills.sort().forEach(skill => {
+                    const count = skillMap[skill] || 0;
+                    const level = count >= 3 ? '■■■■' : count >= 2 ? '■■■□' : count >= 1 ? '■■□□' : '■□□□';
+                    const node = document.createElement('div');
+                    node.className = 'tech-node';
+                    node.innerHTML = `${skill}<span class="tech-level">${level}</span>`;
+                    grid.appendChild(node);
+                });
+            }
+            renderGrid('all');
+
+            filtersEl.addEventListener('click', e => {
+                if (!e.target.classList.contains('filter-btn')) return;
+                filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                renderGrid(e.target.dataset.cat);
+            });
         }
 
-        // Render projects grid
-        async function renderProjects(category = 'all') {
+        // ─── PROJECTS RENDERING ───
+        function renderProjects() {
             const grid = document.getElementById('projects-grid');
-            const projects = getProjectsByCategory(category);
+            const filtersEl = document.getElementById('project-filters');
+            if (!grid || typeof portfolioProjects === 'undefined') return;
 
-            document.getElementById('project-count').textContent = projects.length;
+            const cats = [...new Set(portfolioProjects.map(p => p.category))];
 
-            // Show loading state
-            grid.innerHTML = '<div class="col-span-full text-center text-slate-400 py-8">Cargando proyectos...</div>';
+            filtersEl.innerHTML = '<button class="filter-btn active" data-cat="all">ALL</button>';
+            cats.forEach(cat => {
+                filtersEl.innerHTML += `<button class="filter-btn" data-cat="${cat}">${cat.toUpperCase()}</button>`;
+            });
 
-            // Fetch GitHub stats for projects with URLs
-            const projectsWithGitHub = projects.filter(p => p.githubUrl);
-            if (projectsWithGitHub.length > 0 && Object.keys(githubStatsCache).length === 0) {
-                try {
-                    githubStatsCache = await getMultipleProjectStats(projectsWithGitHub);
-                } catch (error) {
-                    console.error('Error fetching GitHub stats:', error);
+            function renderGrid(filter) {
+                grid.innerHTML = '';
+                const projects = filter === 'all' ? portfolioProjects : portfolioProjects.filter(p => p.category === filter);
+
+                projects.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
+                    card.onclick = () => openModal(p);
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span style="margin-left:auto">${p.category || 'PROJECT'}</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>${p.name}</h3>
+                            <p>${p.description?.substring(0, 120) + '...' || ''}</p>
+                            <div class="tag-list">
+                                ${(p.stack || []).slice(0, 4).map(t => `<span class="tag">${t}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span>${p.status || 'DEPLOYED'}</span>
+                            <div class="github-stats" id="stats-${p.id || ''}"></div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                // Try to load GitHub stats
+                if (typeof loadGitHubStats === 'function') {
+                    projects.forEach(p => {
+                        if (p.github) loadGitHubStats(p);
+                    });
                 }
             }
+            renderGrid('all');
 
-            // Render project cards
-            grid.innerHTML = projects.map(project =>
-                renderProjectCard(project, githubStatsCache[project.id])
-            ).join('');
+            filtersEl.addEventListener('click', e => {
+                if (!e.target.classList.contains('filter-btn')) return;
+                filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                renderGrid(e.target.dataset.cat);
+            });
         }
 
-        // Open project modal
-        function openProjectModal(projectId) {
-            const project = getProjectById(projectId);
-            if (!project) return;
+        // ─── MODAL ───
+        const modal = document.getElementById('project-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalClose = document.getElementById('modal-close');
 
-            const modal = document.getElementById('project-modal');
-            const content = document.getElementById('modal-content');
-
-            content.innerHTML = renderProjectModal(project, githubStatsCache[project.id]);
+        function openModal(p) {
+            modalContent.innerHTML = `
+                <h3>${p.name}</h3>
+                <p>${p.longDescription || p.description || ''}</p>
+                ${p.impactMetrics ? `<p style="color:var(--accent-orange);margin-top:1rem"><strong>Impact:</strong> ${p.impactMetrics}</p>` : ''}
+                <div class="tag-list mt-8">
+                    ${(p.stack || []).map(t => `<span class="tag">${t}</span>`).join('')}
+                </div>
+                ${p.githubUrl ? `<a href="${p.githubUrl}" target="_blank" class="cyber-btn primary mt-8" style="display:inline-block"><span class="btn-text">VIEW_SOURCE()</span></a>` : ''}
+                ${p.liveUrl ? `<a href="${p.liveUrl}" target="_blank" class="cyber-btn secondary mt-8" style="display:inline-block;margin-left:0.5rem"><span class="btn-text">LIVE_DEMO()</span></a>` : ''}
+            `;
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-
-            // Render chart if needed
-            if (project.metrics.type === 'chart') {
-                setTimeout(() => {
-                    const ctx = document.getElementById('modal-chart');
-                    if (ctx) {
-                        new Chart(ctx.getContext('2d'), {
-                            type: 'bar',
-                            data: {
-                                labels: project.metrics.labels,
-                                datasets: [{
-                                    data: project.metrics.data,
-                                    backgroundColor: [project.color + '44', project.color],
-                                    borderColor: project.color,
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                indexAxis: 'y',
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                plugins: { legend: { display: false } },
-                                scales: {
-                                    x: { grid: { color: '#334155' } },
-                                    y: { grid: { display: false } }
-                                }
-                            }
-                        });
-                    }
-                }, 100);
-            }
         }
 
-        // Close modal
-        function closeModal(event) {
-            if (event && event.target.id !== 'project-modal') return;
-
-            const modal = document.getElementById('project-modal');
+        modalClose.addEventListener('click', () => {
             modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
+            document.body.style.overflow = '';
+        });
+        modal.addEventListener('click', e => {
+            if (e.target === modal) { modal.classList.add('hidden'); document.body.style.overflow = ''; }
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                modal.classList.add('hidden'); document.body.style.overflow = '';
             }
         });
 
-        // Smooth scroll
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Initialize
-        renderSkills('all');
-        renderProjects('all');
+        // ─── INIT ───
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSkills();
+            renderProjects();
+        });
     </script>
-
-    <!-- Visualization & Content Choices:
-        1. Radar Chart: Muestra el balance entre código, datos y producto, ideal para la oferta de Satrack.
-        2. PascualBet Stat: Resalta la sincronización al 100%, vital para sistemas transaccionales.
-        3. Capacidad Mambo: Demuestra visión de escalabilidad.
-        4. Diagrama Muelitas: Prueba visual de manejo de arquitecturas complejas.
-        CONFIRMATION: NO SVG, NO Mermaid JS.
-    -->
 </body>
-
 </html>
